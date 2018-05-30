@@ -1,8 +1,33 @@
 {
   "name": "parallaxed",
-  "version": "0.1.0",
   "description": "Easily apply parallax effects to page elements as you scroll.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Ryan Hefner <hi@ryanhefner.com> (https://www.ryanhefner.com)",
+  "repository": "ryanhefner/parallaxed",
+  "bugs": {
+    "url": "https://github.com/ryanhefner/parallaxed/issues"
+  },
+  "homepage": "https://github.com/ryanhefner/parallaxed#readme",
+  "keywords": [
+    "parallax",
+    "parallax-scrolling",
+    "parallax-effects",
+    "scrolling",
+    "animation"
+  ],
+  "files": [
+    "es",
+    "index.js",
+    "src",
+    "umd"
+  ],
+  "directories": {
+    "lib": "/src"
+  },
   "main": "index.js",
+  "module": "es/index.js",
+  "jsnext:main": "src/index.js",
   "scripts": {
     "clean": "rm -f index.js && rm -rf es && rm -rf umd",
     "prebuild": "npm run clean",
@@ -13,19 +38,6 @@
     "push-release": "git push origin master && git push --tags",
     "test": "jest"
   },
-  "repository": "ryanhefner/parallaxed",
-  "keywords": [
-    "parallax",
-    "scrolling",
-    "animation",
-    "stylex"
-  ],
-  "author": "Ryan Hefner <hi@ryanhefner.com> (https://www.ryanhefner.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ryanhefner/parallaxed/issues"
-  },
-  "homepage": "https://github.com/ryanhefner/parallaxed#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
