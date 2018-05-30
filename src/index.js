@@ -19,7 +19,7 @@ class Parallaxed {
     window.addEventListener('resize', this._onResize);
 
     this._observer = new MutationObserver(this._onDOMChange);
-    this._observer(document.body, {
+    this._observer.observe(document.body, {
       childList: true,
       subtree: true,
     });
