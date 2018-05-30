@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Parallaxed - Simple Example</title>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <article>
+    <header class="page-header">
+      <h1 class="page-header-title">Parallaxed</h1>
+      <p class="page-header-copy">Easily apply parallax effects to page elements as you scroll.</p>
+    </header>
+    <section class="page-section">
+      <h2 class="section-title">Selectors</h2>
+      <p class="section-copy">Pass in a string, or array, of the selectors you’d like to target</p>
+    </section>
+    <section class="page-section black">
+      <h2 class="section-title">Enter / Exit</h2>
+      <p class="section-copy">Setup callbacks for when an element enters or exits the viewport.</p>
+    </section>
+    <section class="page-section">
+      <h2 class="section-title">Progress</h2>
+      <p class="section-copy">Progress information is also supplied in case there are styles that need to be set based on the elements position within/through the viewport.</p>
+    </section>
+    <section class="page-section black">
+      <h2 class="section-title">Resize</h2>
+      <p class="section-copy">In addition to <code>scroll</code> events triggering the callbacks, <code>resize</code> events can trigger the callbacks as well.</p>
+    </section>
+    <section class="page-section">
+      <h2 class="section-title">Simple</h2>
+      <p class="section-copy">
+        There could be a lot of other default stuff that this could do, but I was trying to keep this simple.<br>
+        Let me know if there’s something else you’d like to see this do, <a href="https://twitter.com/ryanhefner">@ryanhefner</a>.
+      </p>
+    </section>
+  </article>
+  <script src="assets/js/require.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      requirejs(['assets/js/parallaxed.min.js'], function(Parallaxed) {
+        var parallaxed = new Parallaxed({
+          selectors: '.page-header, .page-section',
+          onEnter: function(data) {
+            data.element.classList.add('in-viewport');
+          },
+          onExit: function(data) {
+            data.element.classList.remove('in-viewport');
+          },
+          onProgress: function(data) {
+
+          },
+        });
+      });
+    });
+  </script>
+</body>
+</html>
