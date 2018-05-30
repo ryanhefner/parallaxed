@@ -35,14 +35,6 @@
    * @author Ryan Hefner <hi@ryanhefner.com> (https://www.ryanhefner.com)
    */
   var Parallaxed = function () {
-    /**
-     * Initialize class
-     *
-     * @param string|array - selectors
-     * @param func - onEnter
-     * @param func - onExit
-     * @param func - onProgress
-     */
     function Parallaxed(_ref) {
       var selectors = _ref.selectors,
           _ref$onEnter = _ref.onEnter,
@@ -59,11 +51,18 @@
       this._onExit = onExit;
       this._onProgress = onProgress;
 
+      this._onDOMChange = this._onDOMChange.bind(this);
       this._onScroll = this._onScroll.bind(this);
       this._onResize = this._onResize.bind(this);
 
       window.addEventListener('scroll', this._onScroll);
       window.addEventListener('resize', this._onResize);
+
+      this._observer = new MutationObserver(this._onDOMChange);
+      this._observer(document.body, {
+        childList: true,
+        subtree: true
+      });
 
       this._checkElements();
     }
@@ -71,6 +70,7 @@
     Parallaxed.prototype.destroy = function destroy() {
       window.removeEventListener('scroll', this._onScroll);
       window.removeEventListener('resize', this._onResize);
+      this._observer.disconnect();
     };
 
     Parallaxed.prototype._refreshActiveElements = function _refreshActiveElements() {
@@ -127,6 +127,11 @@
           progress: progress
         };
       });
+    };
+
+    Parallaxed.prototype._onDOMChange = function _onDOMChange(evt) {
+      this._refreshActiveElements();
+      this._checkElements();
     };
 
     Parallaxed.prototype._onScroll = function _onScroll(evt) {

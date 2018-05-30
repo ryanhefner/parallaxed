@@ -11,11 +11,18 @@ class Parallaxed {
     this._onExit = onExit;
     this._onProgress = onProgress;
 
+    this._onDOMChange = this._onDOMChange.bind(this);
     this._onScroll = this._onScroll.bind(this);
     this._onResize = this._onResize.bind(this);
 
     window.addEventListener('scroll', this._onScroll);
     window.addEventListener('resize', this._onResize);
+
+    this._observer = new MutationObserver(this._onDOMChange);
+    this._observer(document.body, {
+      childList: true,
+      subtree: true,
+    });
 
     this._checkElements();
   }
@@ -40,6 +47,7 @@ class Parallaxed {
   destroy() {
     window.removeEventListener('scroll', this._onScroll);
     window.removeEventListener('resize', this._onResize);
+    this._observer.disconnect();
   }
 
   _refreshActiveElements() {
@@ -101,6 +109,11 @@ class Parallaxed {
         progress,
       };
     });
+  }
+
+  _onDOMChange(evt) {
+    this._refreshActiveElements();
+    this._checkElements();
   }
 
   _onScroll(evt) {
