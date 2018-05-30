@@ -39,7 +39,6 @@ exec('rollup -c -f umd -o umd/parallaxed.min.js', {
 console.log('\nMoving file to examples director ...');
 
 exec('cp umd/parallaxed.min.js examples/assets/js/parallaxed.min.js');
-exec('cp umd/parallaxed.js examples/assets/js/parallaxed.js');
 
 const size = gzipSize.sync(
   fs.readFileSync('umd/parallaxed.min.js')
